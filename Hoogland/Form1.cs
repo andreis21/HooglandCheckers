@@ -169,6 +169,7 @@ namespace Hoogland
 
         bool pieceSelected = false;
         int[] selectedPiece = new int[2];
+        int[] jumpedOverPiece = new int[2];
         private void cellButton_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -178,12 +179,19 @@ namespace Hoogland
             positions[1] = Int32.Parse(positionsString[1]);
             if(button.BackColor == Color.LightYellow)
             {
-                board.SwapPieces(selectedPiece, positions);
+                if(board.GetBoardMatrix()[jumpedOverPiece[0],jumpedOverPiece[1]] != 0)
+                {
+                    board.RemovePiece(jumpedOverPiece);
+                    board.SwapPieces(selectedPiece, positions);
+                }
+                else
+                {
+                    board.SwapPieces(selectedPiece, positions);
+                }
                 RestoreBoardColors();
                 DrawPieces();
                 string moves = movesTextBox.Text;
                 movesTextBox.Text = selectedPiece[0].ToString() + " " + selectedPiece[1].ToString() + " | " + positions[0].ToString() + " " + positions[1].ToString() + Environment.NewLine + moves;
-
             }
             else
             {
@@ -201,7 +209,6 @@ namespace Hoogland
 
         private void CalculateLegalMoves(int y, int x)
         {
-            // TO-DO calculations when a piece opponents piece is in reach
             // TO-DO calculations for king piece
             selectedPiece[0] = y;
             selectedPiece[1] = x;
@@ -209,14 +216,35 @@ namespace Hoogland
             int pieceID = board.GetBoardMatrix()[y,x];
             if (pieceID == 1)
             {
+                int opponentPieceID = 3;
                 if(x == 0)
                 {
                     if(board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                    else if(board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                    {
+                        if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                        else
+                        {
+                            jumpedOverPiece[0] = y + factor;
+                            jumpedOverPiece[1] = x + 1;
+                            btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow;
+                        }
+                    }
                     else btn[y + factor, x + 1].BackColor = Color.LightYellow;
                 }
                 else if(x == 7)
                 {
                     if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                    else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                    {
+                        if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                        else
+                        {
+                            jumpedOverPiece[0] = y + factor;
+                            jumpedOverPiece[1] = x - 1;
+                            btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow; 
+                        }
+                    }
                     else btn[y + factor, x - 1].BackColor = Color.LightYellow;
                 }
                 else
@@ -226,12 +254,52 @@ namespace Hoogland
                         if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
                         {
                             if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                            else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                            {
+                                if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                                else
+                                {
+                                    jumpedOverPiece[0] = y + factor;
+                                    jumpedOverPiece[1] = x - 1;
+                                    btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow;
+                                }
+                            }
                             else btn[y + factor, x - 1].BackColor = Color.LightYellow;
                         }
                         else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
                         {
                             if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                            else if (board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                            {
+                                if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                                else
+                                {
+                                    jumpedOverPiece[0] = y + factor;
+                                    jumpedOverPiece[1] = x + 1;
+                                    btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow;
+                                }
+                            }
                             else btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                            else 
+                            {
+                                jumpedOverPiece[0] = y + factor;
+                                jumpedOverPiece[1] = x + 1;
+                                btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow; 
+                            }
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                            else
+                            {
+                                jumpedOverPiece[0] = y + factor;
+                                jumpedOverPiece[1] = x - 1;
+                                btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow;
+                            }
                         }
                         else
                         {
@@ -245,29 +313,90 @@ namespace Hoogland
             if (pieceID == 3)
             {
                 factor = -1;
+                int opponentPieceID = 1;
                 if (x == 0)
                 {
                     if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                    else if (board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                    {
+                        if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                        else
+                        {
+                            jumpedOverPiece[0] = y + factor;
+                            jumpedOverPiece[1] = x + 1;
+                            btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow;
+                        }
+                    }
                     else btn[y + factor, x + 1].BackColor = Color.LightYellow;
                 }
                 else if (x == 7)
                 {
                     if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                    else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                    {
+                        if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                        else
+                        {
+                            jumpedOverPiece[0] = y + factor;
+                            jumpedOverPiece[1] = x - 1;
+                            btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow;
+                        }
+                    }
                     else btn[y + factor, x - 1].BackColor = Color.LightYellow;
                 }
                 else
                 {
-                    if(y > 0 && y < 7)
+                    if (y > 0 && y < 7)
                     {
                         if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
                         {
                             if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                            else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                            {
+                                if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                                else
+                                {
+                                    jumpedOverPiece[0] = y + factor;
+                                    jumpedOverPiece[1] = x - 1;
+                                    btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow;
+                                }
+                            }
                             else btn[y + factor, x - 1].BackColor = Color.LightYellow;
                         }
                         else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
                         {
                             if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                            else if (board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                            {
+                                if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                                else
+                                {
+                                    jumpedOverPiece[0] = y + factor;
+                                    jumpedOverPiece[1] = x + 1;
+                                    btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow;
+                                }
+                            }
                             else btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x + 1] == opponentPieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + 2 * factor, x + 2] != 0) { }
+                            else
+                            {
+                                jumpedOverPiece[0] = y + factor;
+                                jumpedOverPiece[1] = x + 1;
+                                btn[y + 2 * factor, x + 2].BackColor = Color.LightYellow;
+                            }
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x - 1] == opponentPieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + 2 * factor, x - 2] != 0) { }
+                            else
+                            {
+                                jumpedOverPiece[0] = y + factor;
+                                jumpedOverPiece[1] = x - 1;
+                                btn[y + 2 * factor, x - 2].BackColor = Color.LightYellow;
+                            }
                         }
                         else
                         {

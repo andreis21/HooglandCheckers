@@ -45,5 +45,9 @@ namespace Hoogland
             _boardMatrix[pos1[0], pos1[1]] = _boardMatrix[pos2[0], pos2[1]];
             _boardMatrix[pos2[0], pos2[1]] = temp;
         }
+        public void RemovePiece(int[] pos)
+        {
+            _boardMatrix[pos[0], pos[1]] = 0;
+        }
     }
 }
