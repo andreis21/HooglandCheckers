@@ -221,21 +221,25 @@ namespace Hoogland
                 }
                 else
                 {
-                    if(board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
+                    if (y > 0 && y < 7)
                     {
-                        if(board.GetBoardMatrix()[y + factor, x - 1] == pieceID) {}
-                        else btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                            else btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                            else btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                        }
+                        else
+                        {
+                            btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                            btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        }
                     }
-                    else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
-                    {
-                        if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
-                        else btn[y + factor, x + 1].BackColor = Color.LightYellow;
-                    }
-                    else
-                    {
-                        btn[y + factor, x + 1].BackColor = Color.LightYellow;
-                        btn[y + factor, x - 1].BackColor = Color.LightYellow;
-                    }
+                    else { }
                 }
             }
             if (pieceID == 3)
@@ -253,21 +257,25 @@ namespace Hoogland
                 }
                 else
                 {
-                    if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
+                    if(y > 0 && y < 7)
                     {
-                        if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
-                        else btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID) { }
+                            else btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        }
+                        else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
+                        {
+                            if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
+                            else btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                        }
+                        else
+                        {
+                            btn[y + factor, x + 1].BackColor = Color.LightYellow;
+                            btn[y + factor, x - 1].BackColor = Color.LightYellow;
+                        }
                     }
-                    else if (board.GetBoardMatrix()[y + factor, x - 1] == pieceID)
-                    {
-                        if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID) { }
-                        else btn[y + factor, x + 1].BackColor = Color.LightYellow;
-                    }
-                    else
-                    {
-                        btn[y + factor, x + 1].BackColor = Color.LightYellow;
-                        btn[y + factor, x - 1].BackColor = Color.LightYellow;
-                    }
+                    else { }
                 }
             }
             pieceSelected = true;
