@@ -71,6 +71,7 @@ namespace Hoogland
             this.movesTextBox.Multiline = true;
             this.movesTextBox.Name = "movesTextBox";
             this.movesTextBox.ReadOnly = true;
+            this.movesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.movesTextBox.Size = new System.Drawing.Size(174, 406);
             this.movesTextBox.TabIndex = 3;
             // 

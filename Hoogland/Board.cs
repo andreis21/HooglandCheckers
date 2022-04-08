@@ -38,11 +38,12 @@ namespace Hoogland
         {
             return _boardMatrix;
         }
-        public void SwapPieces(int[,] poz1, int[,] poz2)
+        public void SwapPieces(int[] pos1, int[] pos2)
         {
-            int[,] temp = poz1;
-            poz1 = poz2;
-            poz2 = temp;
+            int temp;
+            temp = _boardMatrix[pos1[0], pos1[1]];
+            _boardMatrix[pos1[0], pos1[1]] = _boardMatrix[pos2[0], pos2[1]];
+            _boardMatrix[pos2[0], pos2[1]] = temp;
         }
     }
 }
