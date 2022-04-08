@@ -249,7 +249,7 @@ namespace Hoogland
                 }
                 else
                 {
-                    if (y > 0 && y < 7)
+                    if (y < 7)
                     {
                         if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
                         {
@@ -346,7 +346,7 @@ namespace Hoogland
                 }
                 else
                 {
-                    if (y > 0 && y < 7)
+                    if (y > 0)
                     {
                         if (board.GetBoardMatrix()[y + factor, x + 1] == pieceID)
                         {

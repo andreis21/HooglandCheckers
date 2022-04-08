@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andre\\source\\repos\\Hoogland\\Hoogland\\Hoogland.csproj": {}
+    "D:\\Proiecte\\HooglandCheckers\\Hoogland\\Hoogland.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andre\\source\\repos\\Hoogland\\Hoogland\\Hoogland.csproj": {
+    "D:\\Proiecte\\HooglandCheckers\\Hoogland\\Hoogland.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andre\\source\\repos\\Hoogland\\Hoogland\\Hoogland.csproj",
+        "projectUniqueName": "D:\\Proiecte\\HooglandCheckers\\Hoogland\\Hoogland.csproj",
         "projectName": "Hoogland",
-        "projectPath": "C:\\Users\\Andre\\source\\repos\\Hoogland\\Hoogland\\Hoogland.csproj",
+        "projectPath": "D:\\Proiecte\\HooglandCheckers\\Hoogland\\Hoogland.csproj",
         "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andre\\source\\repos\\Hoogland\\Hoogland\\obj\\",
+        "outputPath": "D:\\Proiecte\\HooglandCheckers\\Hoogland\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
