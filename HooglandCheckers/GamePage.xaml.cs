@@ -169,7 +169,32 @@ namespace HooglandCheckers
             DrawPieces();
             if (playerMoved)
             {
-                var computerLegalMoves = CalculateLegalMoves("black");
+                var allLegalMoves = CalculateLegalMoves("black");
+                List<string> jumpMoves = new List<string>();
+                foreach (var move in allLegalMoves)
+                {
+                    string[] moveArray = move.Split('|');
+                    List<string> positions = new List<string>();
+                    foreach(var el in moveArray)
+                    {
+                        string[] position = el.Split(',');
+                        positions.Add(position[0]);
+                        positions.Add(position[1]);
+                    }
+                    if (Math.Abs(Int16.Parse(positions[0]) - Int16.Parse(positions[2])) == 2)
+                    {
+                        jumpMoves.Add(move);
+                    }
+                }
+                List<string> computerLegalMoves = new List<string>();
+                if(jumpMoves.Count > 0)
+                {
+                    computerLegalMoves = jumpMoves;
+                }
+                else
+                {
+                    computerLegalMoves = allLegalMoves;
+                }
                 if (computerLegalMoves.Count == 0)
                 {
                     gameBoard.SetGameWinner("red");
@@ -509,13 +534,61 @@ namespace HooglandCheckers
                 {
                     if (matrix[coords[1], coords[0]] == 1 || matrix[coords[1], coords[0]] == 2)
                     {
-                        allMoves = CalculateLegalMoves("black");
+                        var allLegalMoves = CalculateLegalMoves("black");
+                        List<string> jumpMoves = new List<string>();
+                        foreach (var move in allLegalMoves)
+                        {
+                            string[] moveArray = move.Split('|');
+                            List<string> positions = new List<string>();
+                            foreach (var el in moveArray)
+                            {
+                                string[] position = el.Split(',');
+                                positions.Add(position[0]);
+                                positions.Add(position[1]);
+                            }
+                            if (Math.Abs(Int16.Parse(positions[0]) - Int16.Parse(positions[2])) == 2)
+                            {
+                                jumpMoves.Add(move);
+                            }
+                        }
+                        if (jumpMoves.Count > 0)
+                        {
+                            allMoves = jumpMoves;
+                        }
+                        else
+                        {
+                            allMoves = allLegalMoves;
+                        }
                         selectedPiece = btnClicked;
                         pieceSelected = true;
                     }
                     else if (matrix[coords[1], coords[0]] == 3 || matrix[coords[1], coords[0]] == 4)
                     {
-                        allMoves = CalculateLegalMoves("red");
+                        var allLegalMoves = CalculateLegalMoves("red");
+                        List<string> jumpMoves = new List<string>();
+                        foreach (var move in allLegalMoves)
+                        {
+                            string[] moveArray = move.Split('|');
+                            List<string> positions = new List<string>();
+                            foreach (var el in moveArray)
+                            {
+                                string[] position = el.Split(',');
+                                positions.Add(position[0]);
+                                positions.Add(position[1]);
+                            }
+                            if (Math.Abs(Int16.Parse(positions[0]) - Int16.Parse(positions[2])) == 2)
+                            {
+                                jumpMoves.Add(move);
+                            }
+                        }
+                        if (jumpMoves.Count > 0)
+                        {
+                            allMoves = jumpMoves;
+                        }
+                        else
+                        {
+                            allMoves = allLegalMoves;
+                        }
                         selectedPiece = btnClicked;
                         pieceSelected = true;
                     }
@@ -524,11 +597,61 @@ namespace HooglandCheckers
                 {
                     if (playerType.Equals("server"))
                     {
-                        allMoves = CalculateLegalMoves("red");
+                        var allLegalMoves = CalculateLegalMoves("red");
+                        List<string> jumpMoves = new List<string>();
+                        foreach (var move in allLegalMoves)
+                        {
+                            string[] moveArray = move.Split('|');
+                            List<string> positions = new List<string>();
+                            foreach (var el in moveArray)
+                            {
+                                string[] position = el.Split(',');
+                                positions.Add(position[0]);
+                                positions.Add(position[1]);
+                            }
+                            if (Math.Abs(Int16.Parse(positions[0]) - Int16.Parse(positions[2])) == 2)
+                            {
+                                jumpMoves.Add(move);
+                            }
+                        }
+                        if (jumpMoves.Count > 0)
+                        {
+                            allMoves = jumpMoves;
+                        }
+                        else
+                        {
+                            allMoves = allLegalMoves;
+                        }
+                        selectedPiece = btnClicked;
+                        pieceSelected = true;
                     }
                     else if (playerType.Equals("client"))
                     {
-                        allMoves = CalculateLegalMoves("black");
+                        var allLegalMoves = CalculateLegalMoves("black");
+                        List<string> jumpMoves = new List<string>();
+                        foreach (var move in allLegalMoves)
+                        {
+                            string[] moveArray = move.Split('|');
+                            List<string> positions = new List<string>();
+                            foreach (var el in moveArray)
+                            {
+                                string[] position = el.Split(',');
+                                positions.Add(position[0]);
+                                positions.Add(position[1]);
+                            }
+                            if (Math.Abs(Int16.Parse(positions[0]) - Int16.Parse(positions[2])) == 2)
+                            {
+                                jumpMoves.Add(move);
+                            }
+                        }
+                        if (jumpMoves.Count > 0)
+                        {
+                            allMoves = jumpMoves;
+                        }
+                        else
+                        {
+                            allMoves = allLegalMoves;
+                        }
                     }
                     selectedPiece = btnClicked;
                     pieceSelected = true;
